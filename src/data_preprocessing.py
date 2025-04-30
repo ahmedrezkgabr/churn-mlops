@@ -5,9 +5,6 @@ from sklearn.preprocessing import StandardScaler
 def load_data(path):
     return pd.read_csv(path)
 
-import pandas as pd
-from sklearn.preprocessing import StandardScaler
-
 def preprocess_data(df):
 
     # Drop unrelated or identifier columns

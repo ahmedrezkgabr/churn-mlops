@@ -16,17 +16,20 @@ def evaluate_model(model, X_test, y_test, model_name):
     y_pred = model.predict(X_test)
     y_proba = model.predict_proba(X_test)[:, 1] if hasattr(model, "predict_proba") else None
 
+    # Print classification report
     print(f"\nEvaluation for {model_name}")
     print(classification_report(y_test, y_pred))
     if y_proba is not None:
         print("ROC AUC Score:", roc_auc_score(y_test, y_proba))
 
+    # Plot confusion matrix
     cm = confusion_matrix(y_test, y_pred)
     sns.heatmap(cm, annot=True, fmt="d", cmap="Blues")
     plt.title(f"{model_name} Confusion Matrix")
     plt.show()
 
 def train_all_models(X_train, X_test, y_train, y_test):
+    # Define models
     models = {
         "Logistic Regression": LogisticRegression(max_iter=1000),
         "Random Forest": RandomForestClassifier(n_estimators=100, random_state=42),
@@ -36,6 +39,7 @@ def train_all_models(X_train, X_test, y_train, y_test):
         "Neural Network (MLP)": MLPClassifier(hidden_layer_sizes=(64, 32), max_iter=300, random_state=42)
     }
 
+    # Train and evaluate each model
     for name, model in models.items():
         model.fit(X_train, y_train)
         evaluate_model(model, X_test, y_test, name)
