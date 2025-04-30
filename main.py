@@ -1,5 +1,5 @@
-from src.config import DATA_PATH
-from src.data_preprocessing import load_data, preprocess_data
+from src.config import DATA_PATH, PROCESSED_DATA_PATH
+from src.data_preprocessing import load_data, preprocess_data, log_processed_data
 from src.visualization import *
 from src.model import split_data, train_all_models, plot_roc_curves
 
@@ -14,6 +14,8 @@ plot_correlation_heatmap(df)
 
 # 3. Preprocess
 X, y = preprocess_data(df)
+log_processed_data(df, PROCESSED_DATA_PATH)    # log_processed_data(X, y)
+
 
 # 4. Train-test split
 X_train, X_test, y_train, y_test = split_data(X, y)
