@@ -23,7 +23,6 @@ def main():
 
         # 3. Preprocess
         X, y = preprocess_data(df)
-        log_processed_data(X, y)
 
         mlflow.log_param("features_after_preprocessing", X.shape[1])
 
