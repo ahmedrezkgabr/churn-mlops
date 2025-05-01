@@ -1,6 +1,7 @@
 import os
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
+import joblib
 
 def load_data(path):
     return pd.read_csv(path)
@@ -35,6 +36,13 @@ def preprocess_data(df):
     df[['tenure', 'MonthlyCharges', 'TotalCharges']] = scaler.fit_transform(
         df[['tenure', 'MonthlyCharges', 'TotalCharges']]
     )
+
+    scaler = StandardScaler()
+    scaled_columns = ['tenure', 'MonthlyCharges', 'TotalCharges']
+    df[scaled_columns] = scaler.fit_transform(df[scaled_columns])
+    
+    joblib.dump(scaler, 'models/scaler.pkl')
+    joblib.dump(df.drop('Churn', axis=1).columns.tolist(), 'models/columns.pkl')
 
     # Separate features and target variable
     X = df.drop('Churn', axis=1)

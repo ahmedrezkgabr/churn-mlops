@@ -11,6 +11,7 @@ import seaborn as sns
 from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
 import mlflow
 import mlflow.sklearn  # or mlflow.xgboost if needed
+import joblib
 
 def split_data(X, y):
     return train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
@@ -41,6 +42,8 @@ def train_all_models(X_train, X_test, y_train, y_test):
         "MLP": MLPClassifier(hidden_layer_sizes=(64, 32), max_iter=300, random_state=42)
     }
 
+    best_model = None
+    best_score = 0.0
     results = {}
 
     for name, model in models.items():
@@ -53,6 +56,11 @@ def train_all_models(X_train, X_test, y_train, y_test):
         f1 = f1_score(y_test, y_pred)
         prec = precision_score(y_test, y_pred)
         rec = recall_score(y_test, y_pred)
+        if acc > best_score:
+            best_score = acc
+            best_model = model
+            best_model_name = name
+
 
         # MLflow logging
         with mlflow.start_run(nested=True, run_name=name):
@@ -74,6 +82,8 @@ def train_all_models(X_train, X_test, y_train, y_test):
             "recall": rec
         }
 
+
+    joblib.dump(best_model, f"models/best_model.pkl")
     return results
 
 
