@@ -84,6 +84,14 @@ def train_all_models(X_train, X_test, y_train, y_test):
 
 
     joblib.dump(best_model, f"models/best_model.pkl")
+    print(f"Best model: {best_model_name} with accuracy: {best_score:.4f}")
+    
+    # Save the best model
+    mlflow.sklearn.log_model(best_model, "best_model")
+    # Save the scaler
+    mlflow.sklearn.log_model(X_train, "scaler")
+    # Save the feature columns
+    mlflow.log_artifact("models/columns.pkl", artifact_path="feature_columns")
     return results
 
 
