@@ -1,5 +1,5 @@
 
-# 📦 Customer Churn Prediction System
+# Customer Churn Prediction System
 
 This project is an end-to-end machine learning solution for predicting customer churn in a telecom company. It features a complete pipeline that includes data exploration, preprocessing, model training, experiment tracking with MLflow, model serving via a FastAPI inference API, and optional interaction via a Streamlit dashboard.
 
@@ -94,7 +94,7 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### 📊 2. Run Jupyter Notebook
+### 2. Run Jupyter Notebook
 
 ```bash
 jupyter notebook notebooks/churn_analysis.ipynb
@@ -171,13 +171,13 @@ docker run -p 8000:8000 churn-api
 
 ---
 
-## 👤 Author
+## Author
 
 - **Ahmed Rezk**
 - [GitHub](https://github.com/ahmedrezkgabr)
 
 ---
 
-## 📄 License
+## License
 
 This project is for **educational purposes**. No license has been specified.
