@@ -87,8 +87,8 @@ churn-prediction/
 ### 1. Setup Environment
 
 ```bash
-git clone https://github.com/ahmedrezkgabr/churn-prediction.git
-cd churn-prediction
+git clone https://github.com/ahmedrezkgabr/churn-mlops.git
+cd churn-mlops
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
